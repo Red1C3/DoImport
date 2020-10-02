@@ -1,4 +1,3 @@
-DoImport.exe;
-DoImport.ilk;
-DoImport.pdb;
-main.obj;
+bin/
+*.obj
+vc140.pdb
