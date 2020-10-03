@@ -1,6 +1,16 @@
 #include<DoImport/gltfImporter.h>
 using namespace DoImport;
 GltfImporter::GltfImporter(char* path){
+    gltfFilePath=string(path);
+    {
+        int i;
+        for(i=0;i!=gltfFilePath.length();i++){
+            if(gltfFilePath.at(i)=='\\'){
+                break;
+            }
+        }
+        gltfFilePath.erase(i+1);
+    }
     if(!path){cout<<"GLTF Importer was called with a null pointer"; assert(EXIT_SUCCESS);}
     fstream fStream(path,ios::in);
     if(fStream.is_open()) sStream<<fStream.rdbuf();
@@ -41,4 +51,49 @@ GltfImporter::GltfImporter(char* path){
         std::cerr << e.what() << '\n';
         assert(EXIT_SUCCESS);
     }
+}
+char* GltfImporter::readDataFromAccessor(int accessor,int& count,const Document& gltfFile){
+    count=gltfFile["accessors"][accessor]["count"].GetInt();
+    int bufferViewIndex=gltfFile["accessors"][accessor]["bufferView"].GetInt();
+    int bufferIndex=gltfFile["bufferViews"][bufferViewIndex]["buffer"].GetInt();
+    int byteLength=gltfFile["bufferViews"][bufferViewIndex]["byteLength"].GetInt();
+    int byteOffset=gltfFile["bufferViews"][bufferViewIndex]["byteOffset"].GetInt();
+    int bufferLength=gltfFile["buffers"][bufferIndex]["byteLength"].GetInt();
+    const char* fileName=gltfFile["buffers"][bufferIndex]["uri"].GetString();
+    char* data=new char[byteLength];
+    fstream fStream(string(gltfFilePath+fileName),ios::in|ios::binary);
+    if(fStream.is_open()){
+        fStream.seekg(byteOffset,ios::beg);
+        fStream.read(data,byteLength);
+        fStream.close();
+    }else{
+        cout<<"Couldn't find file: "<<fileName<<endl;
+        assert(EXIT_SUCCESS);
+    }
+    return data;
+}
+GltfImporter::~GltfImporter(){
+
+}
+float* GltfImporter::getPositionVectors(int& count,int nodeIndex){
+    if(nodeIndex>=gltf.scene->nodesCount){
+        cout<<"Node parameter is invalid, a null pointer is returned instead"<<endl;
+        cout<<"Wrong Index is"<<nodeIndex<<endl;
+        count=0;
+        return nullptr;
+    }
+    count=gltf.scene->nodes[nodeIndex].mesh->primitives->attributes->positionVectorsCount;
+    return gltf.scene->nodes[nodeIndex].mesh->primitives->attributes->positionVectors;
+}
+float* GltfImporter::getPositionVectors(int & count, const char* meshName){
+    string meshNameModified(meshName);
+    meshNameModified.append(" ");
+    for(int i=0;i<gltf.scene->nodesCount;i++){
+        if(strcmp(gltf.scene->nodes[i].name,meshNameModified.c_str())){
+            return getPositionVectors(count,i);
+        }
+    }
+    cout<<"There is no mesh found with the name "<<meshName<<" , a null pointer is returned instead"<<endl;
+    count=0;
+    return nullptr;
 }

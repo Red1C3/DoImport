@@ -42,6 +42,7 @@ private:
         stringstream sStream;
         char* readDataFromAccessor(int accessor,int& count,const Document& gltfFile);
         Gltf gltf;
+        string gltfFilePath;
 public:
         GltfImporter(char*);
         ~GltfImporter();
