@@ -19,7 +19,7 @@ private:
         struct Primitvies
         {
             Attributes* attributes;
-            unsigned int* indices;
+            unsigned short* indices;
             int indicesCount;
         };
         struct Mesh{
@@ -46,7 +46,13 @@ private:
 public:
         GltfImporter(char*);
         ~GltfImporter();
-        float* getPositionVectors(int& count,int nodeIndex);
-        float* getPositionVectors(int& count,const char* nodeName);        
+        float* getPositionVectors(unsigned int& count,int nodeIndex);
+        float* getPositionVectors(unsigned int& count,const char* nodeName);  
+        float* getNormals(unsigned int& count,int nodeIndex);
+        float* getNormals(unsigned int & count,const char* nodeName);
+        float* getUV0Coords(unsigned int& count,int nodeIndex);
+        float* getUV0Coords(unsigned int& count,const char* nodeName);
+        unsigned short* getFacesIndices(unsigned int& count,int nodeIndex);
+        unsigned short* getFacesIndices(unsigned int& count,const char* nodeName);
     };
 }

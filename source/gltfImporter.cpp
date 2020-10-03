@@ -4,7 +4,7 @@ GltfImporter::GltfImporter(char* path){
     gltfFilePath=string(path);
     {
         int i;
-        for(i=0;i!=gltfFilePath.length();i++){
+        for(i=gltfFilePath.length()-1;i>=0;i--){
             if(gltfFilePath.at(i)=='\\'){
                 break;
             }
@@ -30,7 +30,7 @@ GltfImporter::GltfImporter(char* path){
             gltf.scene->nodes[i].mesh->name=gltfFile["meshes"][meshIndex]["name"].GetString();
             gltf.scene->nodes[i].mesh->primitives=new Primitvies();
             gltf.scene->nodes[i].mesh->primitives->attributes=new Attributes();
-            gltf.scene->nodes[i].mesh->primitives->indices=(unsigned int*)readDataFromAccessor(
+            gltf.scene->nodes[i].mesh->primitives->indices=(unsigned short*)readDataFromAccessor(
             gltfFile["meshes"][meshIndex]["primitives"][0]["indices"].GetInt(),
             gltf.scene->nodes[i].mesh->primitives->indicesCount,gltfFile);
             gltf.scene->nodes[i].mesh->primitives->attributes->positionVectors=(float*)readDataFromAccessor(
@@ -75,7 +75,7 @@ char* GltfImporter::readDataFromAccessor(int accessor,int& count,const Document&
 GltfImporter::~GltfImporter(){
 
 }
-float* GltfImporter::getPositionVectors(int& count,int nodeIndex){
+float* GltfImporter::getPositionVectors(unsigned int& count,int nodeIndex){
     if(nodeIndex>=gltf.scene->nodesCount){
         cout<<"Node parameter is invalid, a null pointer is returned instead"<<endl;
         cout<<"Wrong Index is"<<nodeIndex<<endl;
@@ -85,15 +85,81 @@ float* GltfImporter::getPositionVectors(int& count,int nodeIndex){
     count=gltf.scene->nodes[nodeIndex].mesh->primitives->attributes->positionVectorsCount;
     return gltf.scene->nodes[nodeIndex].mesh->primitives->attributes->positionVectors;
 }
-float* GltfImporter::getPositionVectors(int & count, const char* meshName){
-    string meshNameModified(meshName);
-    meshNameModified.append(" ");
+float* GltfImporter::getPositionVectors(unsigned int & count, const char* nodeName){
+    string nodeNameModified(nodeName);
+    nodeNameModified.append(" ");
     for(int i=0;i<gltf.scene->nodesCount;i++){
-        if(strcmp(gltf.scene->nodes[i].name,meshNameModified.c_str())){
+        if(strcmp(gltf.scene->nodes[i].name,nodeNameModified.c_str())){
             return getPositionVectors(count,i);
         }
     }
-    cout<<"There is no mesh found with the name "<<meshName<<" , a null pointer is returned instead"<<endl;
+    cout<<"There is no mesh found with the name "<<nodeName<<" , a null pointer is returned instead"<<endl;
+    count=0;
+    return nullptr;
+}
+float* GltfImporter::getNormals(unsigned int & count,int nodeIndex){
+    if(nodeIndex>=gltf.scene->nodesCount){
+        cout<<"Node parameter is invalid,a null pointer is returnd instead"<<endl;
+        cout<<"Wrong Index is"<<nodeIndex<<endl;
+        count=0;
+        return nullptr;
+    }
+    count=gltf.scene->nodes[nodeIndex].mesh->primitives->attributes->normalsCount;
+    return gltf.scene->nodes[nodeIndex].mesh->primitives->attributes->normals;
+}
+float* GltfImporter::getNormals(unsigned int& count,const char* nodeName){
+    string nodeNameModified(nodeName);
+    nodeNameModified.append(" ");
+    for(int i=0;i<gltf.scene->nodesCount;i++){
+        if(strcmp(gltf.scene->nodes[i].name,nodeNameModified.c_str())){
+            return getNormals(count,i);
+        }
+    }
+    cout<<"There is no mesh found with the name "<<nodeName<<" , a null pointer is returned instead"<<endl;
+    count=0;
+    return nullptr;
+}
+float* GltfImporter::getUV0Coords(unsigned int & count,int nodeIndex){
+    if(nodeIndex>=gltf.scene->nodesCount){
+        cout<<"Node parameter is invalid,a null pointer is returnd instead"<<endl;
+        cout<<"Wrong Index is"<<nodeIndex<<endl;
+        count=0;
+        return nullptr;
+    }
+    count=gltf.scene->nodes[nodeIndex].mesh->primitives->attributes->UV_0_CoordsCount;
+    return gltf.scene->nodes[nodeIndex].mesh->primitives->attributes->UV_0_Coords;
+}
+float* GltfImporter::getUV0Coords(unsigned int& count,const char* nodeName){
+    string nodeNameModified(nodeName);
+    nodeNameModified.append(" ");
+    for(int i=0;i<gltf.scene->nodesCount;i++){
+        if(strcmp(gltf.scene->nodes[i].name,nodeNameModified.c_str())){
+            return getUV0Coords(count,i);
+        }
+    }
+    cout<<"There is no mesh found with the name "<<nodeName<<" , a null pointer is returned instead"<<endl;
+    count=0;
+    return nullptr;
+}
+unsigned short * GltfImporter::getFacesIndices(unsigned int& count,int nodeIndex){
+    if(nodeIndex>=gltf.scene->nodesCount){
+        cout<<"Node parameter is invalid,a null pointer is returnd instead"<<endl;
+        cout<<"Wrong Index is"<<nodeIndex<<endl;
+        count=0;
+        return nullptr;
+    }
+    count=gltf.scene->nodes[nodeIndex].mesh->primitives->indicesCount;
+    return gltf.scene->nodes[nodeIndex].mesh->primitives->indices;
+}
+unsigned short * GltfImporter::getFacesIndices(unsigned int & count,const char* nodeName){
+    string nodeNameModified(nodeName);
+    nodeNameModified.append(" ");
+    for(int i=0;i<gltf.scene->nodesCount;i++){
+        if(strcmp(gltf.scene->nodes[i].name,nodeNameModified.c_str())){
+            return getFacesIndices(count,i);
+        }
+    }
+    cout<<"There is no mesh found with the name "<<nodeName<<" , a null pointer is returned instead"<<endl;
     count=0;
     return nullptr;
 }
