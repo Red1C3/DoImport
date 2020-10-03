@@ -13,5 +13,6 @@ GltfImporter* DoImporter::readGLTFFile(char* path){
     return gltfImporter;
 }
 void DoImporter::freeGLTFFile(){
-
+    delete gltfImporter;
+    gltfImporter=nullptr;
 }

@@ -15,25 +15,43 @@ private:
             int positionVectorsCount;
             int normalsCount;
             int UV_0_CoordsCount;
+            ~Attributes(){
+                delete[] positionVectors;
+                delete[] normals;
+                delete[] UV_0_Coords;
+            }
         };
         struct Primitvies
         {
             Attributes* attributes;
             unsigned short* indices;
             int indicesCount;
+            ~Primitvies(){
+                delete attributes;
+                delete[] indices;
+            }
         };
         struct Mesh{
             const char* name;
             Primitvies * primitives;
+            ~Mesh(){
+                delete primitives;
+            }
         };
         struct Node{
             const char* name;
             Mesh* mesh;
+            ~Node(){
+                delete mesh;
+            }
         };
         struct Scene{
             const char* name;
             Node* nodes;
             int nodesCount;
+            ~Scene(){
+                delete[] nodes;
+            }
         };
         struct Gltf
         {

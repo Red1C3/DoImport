@@ -73,7 +73,7 @@ char* GltfImporter::readDataFromAccessor(int accessor,int& count,const Document&
     return data;
 }
 GltfImporter::~GltfImporter(){
-
+    delete gltf.scene;
 }
 float* GltfImporter::getPositionVectors(unsigned int& count,int nodeIndex){
     if(nodeIndex>=gltf.scene->nodesCount){
