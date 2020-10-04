@@ -58,19 +58,29 @@ private:
             Scene* scene;
         };
         stringstream sStream;
-        char* readDataFromAccessor(int accessor,int& count,const Document& gltfFile);
         Gltf gltf;
         string gltfFilePath;
+        /*Reads data form an accessor in a GLTF File*/
+        char* readDataFromAccessor(int accessor,int& count,const Document& gltfFile);
 public:
-        GltfImporter(char*);
+        /*Constructs the GLTF file existing in the path into RAM*/
+        GltfImporter(char* path);
         ~GltfImporter();
+        /*Returns a pointer to the first float of position vectors giving the NODE INDEX and changes count varible into floats total count*/
         float* getPositionVectors(unsigned int& count,int nodeIndex);
-        float* getPositionVectors(unsigned int& count,const char* nodeName);  
+        /*Returns a pointer to the first float of position vectors giving the NODE NAME and changes count varible into floats total count*/
+        float* getPositionVectors(unsigned int& count,const char* nodeName); 
+        /*Returns a pointer to the first float of normals vectors giving the NODE INDEX and changes count varible into floats total count*/ 
         float* getNormals(unsigned int& count,int nodeIndex);
+        /*Returns a pointer to the first float of normals vectors giving the NODE NAME and changes count varible into floats total count*/
         float* getNormals(unsigned int & count,const char* nodeName);
+        /*Returns a pointer to the first float of UV stores in channel 0 vectors giving the NODE INDEX and changes count varible into floats total count*/ 
         float* getUV0Coords(unsigned int& count,int nodeIndex);
+        /*Returns a pointer to the first float of UV stores in channel 0 vectors giving the NODE NAME and changes count varible into floats total count*/ 
         float* getUV0Coords(unsigned int& count,const char* nodeName);
+        /*Returns a pointer to the first UNSIGNED SHORT of Faces Indices giving the NODE INDEX and changes count varible into UNSIGNED SHORTS total count*/ 
         unsigned short* getFacesIndices(unsigned int& count,int nodeIndex);
+        /*Returns a pointer to the first UNSIGNED SHORT of Faces Indices giving the NODE NAME and changes count varible into UNSIGNED SHORTS total count*/ 
         unsigned short* getFacesIndices(unsigned int& count,const char* nodeName);
     };
 }
