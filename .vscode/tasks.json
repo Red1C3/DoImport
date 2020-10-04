@@ -16,24 +16,23 @@
             },
             "problemMatcher": [
                 "$msCompile"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            ]
         },
         {
             "type": "shell",
             "label": "Build Library",
             "command": "lib.exe",
             "args": [
+                "/MACHINE:X64",
                 "${workspaceFolder}\\*.obj",
-                "-OUT:${workspaceFolder}\\bin\\VS2019\\DoImporter.lib",
+                "-OUT:${workspaceFolder}\\bin\\VS2019\\DoImporter.lib"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
             },
-            "dependsOn":["Pre-Build Library"],
+            "dependsOn": [
+                "Pre-Build Library"
+            ],
             "problemMatcher": [
                 "$msCompile"
             ],
