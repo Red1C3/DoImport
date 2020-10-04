@@ -3,8 +3,6 @@
 #include<sstream>
 #include<fstream>
 #include<iostream>
-using namespace std;
-using namespace rapidjson;
 namespace DoImport{
     class GltfImporter{
 private:
@@ -57,11 +55,11 @@ private:
         {
             Scene* scene;
         };
-        stringstream sStream;
+        std::stringstream sStream;
         Gltf gltf;
-        string gltfFilePath;
+        std::string gltfFilePath;
         /*Reads data form an accessor in a GLTF File*/
-        char* readDataFromAccessor(int accessor,int& count,const Document& gltfFile);
+        char* readDataFromAccessor(int accessor,int& count,const rapidjson::Document& gltfFile);
 public:
         /*Constructs the GLTF file existing in the path into RAM*/
         GltfImporter(char* path);

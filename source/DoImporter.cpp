@@ -2,7 +2,7 @@
 using namespace DoImport;
 GltfImporter* DoImporter::getGLTFImporter(){
     if(gltfImporter==nullptr){
-        cout<<"A null gltfImporter was requested"<<endl;
+        std::cout<<"A null gltfImporter was requested"<<std::endl;
         assert(EXIT_SUCCESS);
     }
     return gltfImporter;

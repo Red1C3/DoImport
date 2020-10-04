@@ -1,5 +1,6 @@
 #include<DoImport/DoImporter.h>
 using namespace DoImport;
+using namespace std;
 int main(){
     DoImporter di;
     unsigned int count;

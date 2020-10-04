@@ -23,31 +23,49 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "type": "shell",
+            "label": "Pre-Build Library",
+            "command": "cl.exe",
+            "args": [
+                "/c",
+                "/EHsc",
+                "-I",
+                "${workspaceFolder}\\include",
+                "${workspaceFolder}\\source\\*.cpp"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "Build Library",
+            "command": "lib.exe",
+            "args": [
+                "${workspaceFolder}\\*.obj",
+                "-OUT:${workspaceFolder}\\bin\\DoImporter.lib",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn":["Pre-Build Library"],
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ],
-    {
-        "type": "shell",
-        "label": "C/C++: cl.exe build active file",
-        "command": "cl.exe",
-        "args": [
-            "/Zi",
-            "/EHsc",
-            "-I",
-            "${workspaceFolder}\\include",
-            "/Fe:",
-            "${workspaceFolder}\\bin\\DoImport.exe",
-            "${workspaceFolder}\\source\\*.cpp"
-        ],
-        "options": {
-            "cwd": "${workspaceFolder}"
-        },
-        "problemMatcher": [
-            "$msCompile"
-        ],
-        "group": {
-            "kind": "build",
-            "isDefault": true
-        }
-    }
     "version": "2.0.0"
 }
