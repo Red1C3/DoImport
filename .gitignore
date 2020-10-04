@@ -2,3 +2,4 @@ bin/
 *.obj
 vc140.pdb
 Assets/
+example/
