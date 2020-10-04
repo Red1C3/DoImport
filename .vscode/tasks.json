@@ -2,30 +2,6 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "C/C++: cl.exe build active file",
-            "command": "cl.exe",
-            "args": [
-                "/Zi",
-                "/EHsc",
-                "-I",
-                "${workspaceFolder}\\include",
-                "/Fe:",
-                "${workspaceFolder}\\bin\\DoImport.exe",
-                "${workspaceFolder}\\source\\*.cpp"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": [
-                "$msCompile"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
-            "type": "shell",
             "label": "Pre-Build Library",
             "command": "cl.exe",
             "args": [
@@ -52,7 +28,7 @@
             "command": "lib.exe",
             "args": [
                 "${workspaceFolder}\\*.obj",
-                "-OUT:${workspaceFolder}\\bin\\DoImporter.lib",
+                "-OUT:${workspaceFolder}\\bin\\VS2019\\DoImporter.lib",
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
