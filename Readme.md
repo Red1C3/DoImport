@@ -1,6 +1,6 @@
 # DoImport
 
-DoImport is a C++ libaby which aims to support some common file format to import into other projects, especially projects involving game devlopment and computer graphics.
+DoImport is a C++ library which aims to support some common file format to import into other projects, especially projects involving game devlopment and computer graphics.
 ## Description
 For now the project only supports basic importing for GLTF Files (with BIN file separeted) format, but it will be updated to support more features in the future.
 ## Installation
