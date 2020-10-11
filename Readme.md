@@ -10,7 +10,7 @@ An example project is included in \examples with a GLTF File plus a BIN file.
 ## Roadmap
 The project WILL support at least PNG Files support, more files formats will be supported later on too.
 ## Contributing
-The project is open for contributions, try to follow my pattern in coding, a special class for each special format.
+The project is open for contributions, it's recommended to create a class for each format loader and create a pointer to an object of that class in DoImporter class.
 ## Find this software useful? support the developer !
 [Become a Patron !](https://www.patreon.com/RedDeadAlice)
 ## License
