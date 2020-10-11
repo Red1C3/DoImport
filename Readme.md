@@ -2,13 +2,13 @@
 
 DoImport is a C++ library which aims to support some common file format to import into other projects, especially projects involving game devlopment and computer graphics.
 ## Description
-For now the project only supports basic importing for GLTF Files (with BIN file separeted) format, but it will be updated to support more features in the future.
+For now the project only supports basic importing for PNG and GLTF Files (with BIN file separeted) format.
 ## Installation
 Import lib files from \bin and add \include folder to your project include path, in case lib files aren't complitiable with your compiler, you can build the lib easily.
 ## Usage
-An example project is included in \examples with a GLTF File plus a BIN file.
+Examples for each format are included in /examples folder
 ## Roadmap
-The project WILL support at least PNG Files support, more files formats will be supported later on too.
+More updates on GLTF WILL be releasing in the future.
 ## Contributing
 The project is open for contributions, it's recommended to create a class for each format loader and create a pointer to an object of that class in DoImporter class.
 ## Find this software useful? support the developer !
@@ -36,7 +36,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 # Legal notices
-This project uses RapidJSON by Tencent:
+## This project uses RapidJSON by THL A29 Limited:
 
 Tencent is pleased to support the open source community by making RapidJSON available.
 
@@ -51,3 +51,25 @@ Unless required by applicable law or agreed to in writing, software distributed
 under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
 CONDITIONS OF ANY KIND, either express or implied. See the License for the 
 specific language governing permissions and limitations under the License.
+
+## This project uses lodepng by Lode Vandevenne
+Copyright (c) 2005-2018 Lode Vandevenne
+
+This software is provided 'as-is', without any express or implied
+warranty. In no event will the authors be held liable for any damages
+arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it
+freely, subject to the following restrictions:
+
+    1. The origin of this software must not be misrepresented; you must not
+    claim that you wrote the original software. If you use this software
+    in a product, an acknowledgment in the product documentation would be
+    appreciated but is not required.
+
+    2. Altered source versions must be plainly marked as such, and must not be
+    misrepresented as being the original software.
+
+    3. This notice may not be removed or altered from any source
+    distribution.
