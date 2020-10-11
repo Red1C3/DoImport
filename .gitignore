@@ -2,3 +2,7 @@
 vc140.pdb
 Assets/
 .vscode/
+source/main.cpp
+DoImporter.exe
+DoImporter.ilk
+DoImporter.pdb
