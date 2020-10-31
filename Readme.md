@@ -3,14 +3,11 @@
 DoImport is a C++ library which aims to support some common file format to import into other projects, especially projects involving game devlopment and computer graphics.
 ## Description
 For now the project only supports basic importing for PNG and GLTF Files (with BIN file separeted) format.
+Note: This project is depracated and will not have future updates, a new project will probably drop soon.
 ## Installation
 Import lib files from \bin and add \include folder to your project include path, in case lib files aren't complitiable with your compiler, you can build the lib easily.
 ## Usage
 Examples for each format are included in /examples folder
-## Roadmap
-More updates on GLTF WILL be releasing in the future.
-## Contributing
-The project is open for contributions, it's recommended to create a class for each format loader and create a pointer to an object of that class in DoImporter class.
 ## Find this software useful? support the developer !
 [Become a Patron !](https://www.patreon.com/RedDeadAlice)
 ## License
